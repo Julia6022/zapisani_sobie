@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form class="register" method="POST">
+        {% csrf_token %}
+        <div>
+            <label>E-mail:</label>
+            {{ form.username }}
+        </div>
+        <div>
+            <label>Hasło:</label>
+            {{ form.password }}
+        </div>
+        <div style="margin-top: 15px">
+          <button type="submit" class="button">Zaloguj się</button>
+        </div>
+        <div style="margin: 15px">
+            <p>Nie masz jeszcze konta?<a href="/register">Zarejestruj się</a></p>
+        </div>
+        <div style="margin-top: 35px">
+            <p>Zapomniałeś(-aś) hasła?<a href="{% url 'password_reset' %}">Zresetujn hasło</a></p>
+        </div>
+    <span class="material-icons">
+                phone_iphone vpn_key call visibility visibility_off person_add delete account_circle
+                favorite favorite_border help_outline login logout more_horiz
+                ios_share add photo_camera navigate_next
+            </span>
+    </form>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div>
+        <h1>
+            Spis treści:
+        </h1>
+        <ol>
+            <li>Wprowadzenie</li>
+            <li>O serwisie
+                <ol>
+                    <li>Jak to działa?</li>
+                </ol>
+            </li>
+            <li>O listach
+                <ol>
+                    <li>O nadawcy</li>
+                    <li>Rozwiązanie problemu</li>
+                </ol>
+            </li>
+            <li>Poradnik pisania listów</li>
+        </ol>
+    </div>
+    <div class="content">
+        <div>
+            <h1>O serwisie</h1>
+            <p>
+                Autorem niniejszego serwisu jest Julia Wróblewska. Serwis ten stanowi integralną
+                część pracy licencjackiej (kierunek: Elektroniczne Przetwarzanie Informacji),
+                przygotowanej pod kierunkiem dr. Piotra Śliwińskiego na Wydziale Zarządzania i
+                Komunikacji Społecznej Uniwersytetu Jagiellońskiego.
+            </p>
+            <p>
+                Portal randkowy „Zapisani sobie” jest połączeniem dzisiejszego sposobu randkowania z
+                tradycją pisania listów. Użytkownicy mogą łączyć się w pary i przesyłać sobie elektroniczne
+                listy nawet na drugi koniec świata!
+            </p>
+            <h2>Jak to działa?</h2>
+            <p>
+                Po rejestracji tworzysz własny profil, gdzie piszesz coś o sobie.
+                Potem wrzucasz kilka swoich zdjęć. Na stronie „Profile” będziesz mógł/mogła przejrzeć
+                listę profili innych osób. Po wejściu na wybrany profil, będziesz mógł/mogła wysłać tej
+                osobie wiadomość. Potem wystarczy czekać na odpowiedź i cieszyć się nową znajomością!
+            </p>
+        </div>
+        <div style="align-items: center">
+            <img class="navimage" src="{% static 'images/border_nav.png' %}" alt="Zdjęcie ramki"/>
+        </div>
+        <div>
+            <h1>O listach</h1>
+            <p class="quote">
+                „List to tekst rodzący się z nieobecności adresata i samotności nadawcy, pragnącego przekroczyć
+                doświadczenie braku osoby, do której pisze i którą w ten sposób uobecnia”
+            </p>
+            <p class="author">Joana Correia de Magalhães</p>
+            <p>
+                List uważany jest za jeden z najstarszych gatunków literackich. Proces modernizacji wyparł
+                jednak przestarzałe zwyczaje i zastąpił je nowszą technologią i wynalazkami. W miejsce listów
+                wkroczyły faks, telefon, radio, telewizja oraz sam Internet. Wysyłanie listów na co dzień
+                nie jest już opłacalne ani wygodnie.
+            </p>
+            <h2>O nadawcy</h2>
+            <p class="quote">
+                „Pisanie listów jest dzisiaj sztuką zamierającą. […] Wszystkiemu winien jest chroniczny
+                brak czasu, a także nasza wygoda, zmuszająca do korzystania ze środków komunikacji,
+                które ów czas maksymalnie skracają̨, ale też […] standaryzują̨, pozbawiają̨ intymności,
+                a może nawet... duszy?”
+            </p>
+            <p class="author"> Jolanta Szlachecka, Sztuka pisania listów</p>
+            <p>
+                Przez złożoność przekazu i różne sposoby interpretacji list jest nie tylko narzędziem
+                komunikacji, ale też odbiciem samej osoby nadającej.</p>
+            <p>
+                Razem z listami znika także uczuciowość konwersacji. Musimy więc zadać sobie pytanie.
+                Czy sztuka pisania listów umrze na zawsze? Czy możemy coś zrobić? Nasz serwis jest
+                odpowiedzią na ten problem.
+            </p>
+            <h2>Rozwiązanie problemu</h2>
+            <p>Oryginalnie, autor listów pozwalał czytelnikowi na wgląd w jego osobowość i emocje poprzez rzeczy, takie jak:
+                <ul class="listList">
+                    <li>Używany język,</li>
+                    <li>Styl pisma,</li>
+                    <li>Treść listu,</li>
+                    <li>Dobór papieru,</li>
+                    <li>Dodatkowe elementy (np. słynna kropelka łzy na kartce).</li>
+                </ul>
+            </p>
+            <p>
+                Nasz portal pozwala użytkownikom na personalizacje wysyłanych listów.
+                Mogą wybrać oferowane przez nas papiery, a nawet czcionkę, którą będą one napisane.</p>
+            <p class="quote">
+                „Jeśli ktoś dziś pisze do kogoś „prawdziwe” listy, [...] znaczy to […], że
+                traktuje adresata/adresatkę jako osobę wyjątkową. […] chce ją nie tylko poinformować o
+                tym i o owym, lecz przede wszystkim stara się to uczynić w sposób podkreślający
+                nadzwyczajność relacji, jej swoistą intymność.”
+            </p>
+            <p class="author">Jolanta Szlachecka, Sztuka pisania listów</p>
+        </div>
+    </div>
+{% endblock %}

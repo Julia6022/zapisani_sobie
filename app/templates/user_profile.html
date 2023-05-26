@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="profileinfo">
+        <img class="profile_pic" src="{% static 'images/border_img.png' %}" alt='Ramka zdjęcia'>
+        <img src="{{ profile.userprofile.profile_pic.url }}" alt="Zdjęcie użytkownika {{ profile.first_name }}">
+        <div style="width: 100%; flex-direction: row; justify-content: space-evenly; align-items: center">
+            <h2 style="text-decoration: none">{{ profile.username  }}</h2>
+            <h2 style="text-decoration: none">{{ profile.userprofile.age }} lat</h2>
+            <span class="material-icons">favorite</span>
+        </div>
+
+        <button class="button"><a style="color: black; padding: 0 40px; text-decoration: none" href="{% url 'app:send_message' profile.id %}">Wyślij list</a></button>
+    </div>
+    <div class="profileinfo" style="width: 60%">
+        <table>
+            <tr>
+                <td class="label"><span class="material-icons">person</span>Imię:</td>
+                <td>{{ profile.first_name }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">person</span>Nazwisko:</td>
+                <td>{{ profile.last_name }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">transgender</span>Płeć:</td>
+                <td>{{ profile.get_sex_display }}</td>
+            </tr>
+            {% if profile.userprofile.country %}
+                <tr>
+                    <td class="label"><span class="material-icons">language</span>Kraj:</td>
+                    <td>{{ profile.userprofile.get_country_display }}</td>
+                </tr>
+            {% endif %}
+            {% if profile.userprofile.bio %}
+                <tr>
+                    <td class="label"><span class="material-icons">edit</span>Opis:</td>
+                    <td>{{ profile.userprofile.bio }}</td>
+                </tr>
+            {% endif %}
+            {% if profile.userprofile.interests %}
+                <tr>
+                    <td class="label"><span class="material-icons">interests</span>Zainteresowania:</td>
+                    <td>{{ profile.userprofile.interests }}</td>
+                </tr>
+            {% endif %}
+            {% if profile.userprofile.education %}
+                <tr>
+                    <td class="label"><span class="material-icons">school</span>Edukacja:</td>
+                    <td>{{ profile.userprofile.education }}</td>
+                </tr>
+            {% endif %}
+            {% if profile.userprofile.job %}
+                <tr>
+                    <td class="label"><span class="material-icons">work</span>Praca:</td>
+                    <td>{{ profile.userprofile.job }}</td>
+                </tr>
+            {% endif %}
+            {% if profile.userprofile.languages%}
+                <tr>
+                    <td class="label"><span class="material-icons">translate</span>Języki:</td>
+                    <td>{{ profile.userprofile.languages }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}

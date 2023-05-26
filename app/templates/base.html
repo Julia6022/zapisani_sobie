@@ -1,0 +1,64 @@
+<html lang="pl">
+<head>
+    {% load static %}
+    <title style="display: none">Zapisani sobie</title>
+
+    <link rel='stylesheet' href='{% static 'style.css' %}' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Allison&family=Barlow+Condensed:wght@200&family=Ephesis&family=Gwendolyn&family=Lato:wght@100;400&family=Lovers+Quarrel&family=Mea+Culpa&family=MonteCarlo&family=Open+Sans:wght@300;400&family=Pinyon+Script&family=Qwigley&family=Roboto+Condensed:wght@300&family=Roboto:wght@300&family=Source+Sans+Pro:wght@300&family=Whisper&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal randkowy do wysyłania listów miłosnych.">
+
+</head>
+<body>
+    {% load static %}
+    <nav>
+        {% if user.is_authenticated %}
+            <ul>
+                <li><a href="{% url 'app:index' %}">Strona główna</a></li>
+                <li><a href="{% url 'app:profile_list' %}">Profile</a></li>
+                <li><a href="{% url 'app:inbox' %}">Listy</a></li>
+                <li><a href="{% url 'app:profile' %}">Konto</a></li>
+                <li><a href="{% url 'app:logout' %}">Wyloguj się</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="{% url 'app:index' %}">Strona główna</a></li>
+                <li><a href="{% url 'app:login' %}">Zaloguj się</a></li>
+                <li><a href="{% url 'app:register' %}">Zarejestruj się</a></li>
+            </ul>
+        {% endif %}
+        <img style="margin-top: -30px;" class="navimage" src="{% static 'images/border_nav.png' %}" alt="Zdjęcie ramki"/>
+    </nav>
+
+
+
+    <section>
+        {% load static %}
+        {% block body %}
+        {% endblock %}
+    </section>
+    <footer>
+        <div style="width: 50%; font-size: 10px">
+            Autorem niniejszego serwisu jest Julia Wróblewska.<br><br>
+            Serwis ten stanowi integralną część pracy licencjackiej
+            (kierunek: Elektroniczne Przetwarzanie Informacji),
+            przygotowanej pod kierunkiem dr. Piotra Śliwińskiego na Wydziale Zarządzania i
+            Komunikacji Społecznej Uniwersytetu Jagiellońskiego.
+        </div>
+        <div style="width: 20%">
+            <h4 style="font-size: 10px">Linki do użytej grafiki:</h4>
+            <a href="https://www.freepik.com/free-vector/blank-brown-paper-design_13312258.htm#&position=7&from_view=collections" style="font-size: 10px">rawpixel.com</a>
+            <a href="https://www.freepik.com/free-vector/premium-quality-banner-collection_4168586.htm#&position=3&from_view=collections" style="font-size: 10px">rawpixel.com</a>
+            <a href="https://www.freepik.com/free-photo/wedding-bouquet-with-envelopes_2359674.htm#&position=1&from_view=undefined" style="font-size: 10px">kbza</a>
+            <a href="https://www.freepik.com/free-vector/ornamental-vintage-floral-background_5850982.htm#&position=21&from_view=undefined" style="font-size: 10px">1# Freepik</a>
+            <a href="https://www.freepik.com/free-photo/floral-branch-with-wedding-invitation_7016080.htm#from_view=detail_alsolike" style="font-size: 10px">2# Freepik</a>
+        </div>
+    </footer>
+</body>
+</html>
+

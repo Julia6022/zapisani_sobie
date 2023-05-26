@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form class="sending-message" method="post">
+        {% csrf_token %}
+<form method="post" action="">
+  {% csrf_token %}
+  <input type="text" name="subject" placeholder="Subject" value="Re: {{ original_message.subject }}"><br>
+  <textarea name="body" placeholder="Message"></textarea><br>
+  <input type="submit" value="Send">
+</form>
+    </form>
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form class="sending-message" method="post">
+        {% csrf_token %}
+        <div class="message-content">
+            <p class="view-message-title">{{ message.subject }}</p>
+            {{ message.body }}
+        </div>
+        <div class="next-to-message">
+            <p>List od {{ message.sender.first_name }}</p>
+            <a href="{{ user.first_name }}">Zobacz profil użytkownika</a>
+
+            <p>Nie wiesz jak zacząć?<br>Sprawdź nasz poradnik pisania listów!</p>
+            <a href="inbox.html">Zobacz</a>
+
+            <p>Sprawdź całą konwersację z użytkownikiem</p>
+            <a href="inbox.html">Zobacz</a>
+
+            <a href="{% url 'app:send_reply' message.id %}" style="padding:0" class="button">Wyślij odpowiedź</a>
+        </div>
+    </form>
+{% endblock %}
+
+

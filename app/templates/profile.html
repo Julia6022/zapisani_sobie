@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="profileinfo">
+            <img class="profile_pic" src="{% static 'images/border_img.png' %}" alt='Ramka zdjęcia'>
+            <img src="{{ user.userprofile.profile_pic.url }}" alt="Zdjęcie użytkownika {{ user.first_name }}">
+            <div style="width: 100%; flex-direction: row; justify-content: space-evenly">
+                <h2 style="text-decoration: none">{{ user.username  }}</h2>
+                <h2 style="text-decoration: none">{{ user.userprofile.age }} lat</h2>
+            </div>
+            <div style="width: 100%; flex-direction: row; justify-content: space-evenly; align-items: center">
+                <h2 style="text-decoration: none">Ilość polubień: </h2><span class="material-icons">favorite</span> {{ number_of_followers }}
+            </div>
+        </div>
+
+        <div class="profileinfo" style="width: 60%">
+            <table>
+                <tr>
+                    <td class="label"><span class="material-icons">person</span>Imię:</td>
+                    <td>{{ user.first_name }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">person</span>Nazwisko:</td>
+                    <td>{{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">transgender</span>Płeć:</td>
+                    <td>{{ user.get_sex_display }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">cake</span>Data urodzenia:</td>
+                    <td>{{ user.date_of_birth }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a class="button" style="padding: initial" href="{% url 'app:account_settings' %}">
+                             <span style="margin-right: 10px" class="material-icons">settings</span>
+                             Edytuj konto
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">public</span>Kraj:</td>
+                    {% if user.userprofile.country %}
+                        <td>{{ user.userprofile.get_country_display }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">edit</span>Opis:</td>
+                    {% if user.userprofile.bio %}
+                        <td>{{ user.userprofile.bio }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">interests</span>Zainteresowania:</td>
+                    {% if user.userprofile.interests %}
+                        <td>{{ user.userprofile.interests }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">school</span>Edukacja:</td>
+                    {% if user.userprofile.education %}
+                        <td>{{ user.userprofile.education }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">work</span>Praca:</td>
+                    {% if user.userprofile.job %}
+                        <td>{{ user.userprofile.job }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">translate</span>Języki:</td>
+                    {% if user.userprofile.languages %}
+                        <td>{{ user.userprofile.languages }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">transgender</span>Interesują mnie:</td>
+                    {% if user.userprofile.sex_preference %}
+                        <td>{{ user.userprofile.get_sex_preference_display }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">trending_up</span>Minimalny wiek:</td>
+                    {% if user.userprofile.min_age_preference %}
+                        <td>{{ user.userprofile.min_age_preference }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class="label"><span class="material-icons">trending_down</span>Maksymalny wiek:</td>
+                    {% if user.userprofile.max_age_preference %}
+                        <td>{{ user.userprofile.max_age_preference }}</td>
+                    {% else %}
+                        <td>- - -</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>
+                        <a class="button" style="padding: initial" href="{% url 'app:profile_settings' %}">
+                             <span style="margin-right: 10px" class="material-icons">settings</span>
+                             Edytuj profil
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form class="register" method="POST">
+        {% csrf_token %}
+        <strong style="text-decoration: underline; margin: 0 10px 10px; width: 100%">Dane konta:</strong>
+
+        {% for field in user_form %}
+            <div>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+
+        <div style="margin-top: 25px">
+            <button type="submit" class="button">Załóż konto</button>
+        </div>
+        <div style="margin-top: 25px">
+            <p>Masz już konto? Zaloguj się tutaj: <a href="/login">Logowanie</a></p>
+        </div>
+    </form>
+{% endblock %}

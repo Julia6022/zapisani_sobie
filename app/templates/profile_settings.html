@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="profileinfo">
+        <img class="profile_pic" src="{% static 'images/border_img.png' %}" alt='Ramka zdjęcia'>
+        <img src="{{ request.user.userprofile.profile_pic.url }}" alt="Zdjęcie użytkownika {{ request.user.first_name }}">
+        <div style="flex-direction: row; justify-content: space-between">
+            <h2>{{ user.first_name  }}</h2>
+            <h2>{{ user.userprofile.age }}</h2>
+            <h2>{{ number_of_followers }}</h2>
+            <form class="profileinfo" style="width: 60%; flex-direction: column" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ profile_form.image }}
+            </form>
+        </div>
+    </div>
+    <form class="profileinfo" style="width: 50%" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td class="label"><span class="material-icons">language</span>Kraj:</td>
+                <td>{{ profile_form.country }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">school</span>Edukacja:</td>
+                <td>{{ profile_form.education }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">work</span>Praca:</td>
+                <td>{{ profile_form.job }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">edit</span>Opis:</td>
+                <td>{{ profile_form.bio }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">translate</span>Znane języki:</td>
+                <td>{{ profile_form.languages }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">interests</span>Zainteresowania:</td>
+                <td>{{ profile_form.interests }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">transgender</span>Interesują mnie:</td>
+                <td>{{ profile_form.sex_preference }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">trending_up</span>Minimalny wiek:</td>
+                <td>{{ profile_form.min_age_preference}}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">trending_down</span>Maksymalny wiek:</td>
+                <td>{{ profile_form.max_age_preference }}</td>
+            </tr>
+            <tr>
+                <td class="label"><span class="material-icons">add_photo_alternate </span>Zdjęcia:</td>
+                <td>{{ profile_form.profile_pic }}</td>
+            </tr>
+        </table><br>
+        <button type="submit" class="button" style="width: 50%">
+            <span style="margin-right: 10px" class="material-icons">edit</span>
+            Zapisz zmiany na profilu
+        </button>
+    </form>
+{% endblock %}
+
