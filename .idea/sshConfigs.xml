@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="limba.wzks.uj.edu.pl" id="af61ecfe-851b-4207-b008-c69ae3085fe1" port="4016" nameFormat="DESCRIPTIVE" username="20_wroblewska" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

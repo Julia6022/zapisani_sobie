@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="64049460-27bb-4636-a294-b742f1d1da21" name="limba.wzks.uj.edu.pl" url="https://limba.wzks.uj.edu.pl/20_wroblewska/zapisani_sobie/">
+        <fileTransfer rootFolder="/home/epi/20_wroblewska/zapisani_sobie" accessType="SFTP" host="limba.wzks.uj.edu.pl" port="4016" sshConfigId="af61ecfe-851b-4207-b008-c69ae3085fe1" sshConfig="20_wroblewska@limba.wzks.uj.edu.pl:4016 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
