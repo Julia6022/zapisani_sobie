@@ -1,24 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
-    <form class="sending-message" method="post">
-        {% csrf_token %}
-        <div class="message-content">
-            <p class="view-message-title">{{ message.subject }}</p>
-            {{ message.body }}
+    <div class="sending-message">
+        <div class="message">
+            <div class="view-message-title" style="font-family: {{ message.font_family }}; font-size: {{ message.font_size }}">{{ message.subject }}</div>
+            <div class="view-message-content" style="font-family: {{ message.font_family }}; font-size: {{ message.font_size }}">{{ message.body }}</div>
         </div>
+
         <div class="next-to-message">
-            <p>List od {{ message.sender.first_name }}</p>
-            <a href="{{ user.first_name }}">Zobacz profil użytkownika</a>
+            <div>
+                <h1 style="text-decoration: none; margin: 0">List od: {{ message.sender.first_name }}</h1>
+                <a href="{{ message.sende.profile.url }}">Zobacz profil użytkownika</a>
+            </div>
+            <div>
+                {% if message.picture %}
+                    <p>Użytkownik przesłał Ci:</p>
+                    <img style="max-width: 300px; height: auto; margin-top: 15px" src="{% static message.picture %}" alt="Przesłany obiekt">
+                {% endif %}
+            </div>
 
-            <p>Nie wiesz jak zacząć?<br>Sprawdź nasz poradnik pisania listów!</p>
-            <a href="inbox.html">Zobacz</a>
-
-            <p>Sprawdź całą konwersację z użytkownikiem</p>
-            <a href="inbox.html">Zobacz</a>
-
-            <a href="{% url 'app:send_reply' message.id %}" style="padding:0" class="button">Wyślij odpowiedź</a>
+            <div>
+                <p style="display: inline">Sprawdź <a style="display: inline" href="inbox.html">całą konwersację</a> z użytkownikiem</p>
+                <a href="{% url 'app:send_reply' message.id %}" style="padding:0; margin-top: 15px" class="button">Wyślij odpowiedź</a>
+            </div>
         </div>
-    </form>
+    </div>
 {% endblock %}
 
 

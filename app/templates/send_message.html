@@ -1,22 +1,68 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
+    <script style="display: none">
+        $(document).ready(function() {
+            $('#font_family').on('change', function() {
+                updateMessageContent();
+            });
+
+            $('#font_size').on('change', function() {
+                updateMessageContent();
+            });
+
+            $('#picture').on('change', function() {
+                var picture = $(this).val();
+                if (picture) {
+                    $('#selected-picture').attr('src', picture);
+                    $('#selected-picture').show();
+                } else {
+                    $('#selected-picture').hide();
+                }
+            });
+
+            function updateMessageContent() {
+                var font = $('#font_family').val();
+                var size = $('#font_size').val();
+
+                $('#message-content, #message-title').css('font-family', font);
+
+                $('#message-content, #message-title').css('font-size', size);
+            }
+        });
+    </script>
+
     <form class="sending-message" method="post">
         {% csrf_token %}
-        <div class="message">
-            <p class="view-message-title">Tytuł: {{ form.subject }}</p>
-            {{ form.body }}
+
+        <img id="selected-picture" src="{{ picture.choices.1.0 }}" alt="Selected Picture" style="max-width: 300px; height: auto;">
+
+        <div>
+            <div class="message">
+                {{ form.subject }}
+                {{ form.body }}
+            </div>
         </div>
+
         <div class="next-to-message">
-            <p>List do {{ user.first_name }}</p>
-            <a href="{{ user.first_name }}">Zobacz profil użytkownika</a>
+            <div style="margin-bottom: 30px">
+                <h1 style="text-decoration: none; margin: 0">List do: {{ user.first_name }}</h1>
+                <a href="{{ receiver.get_absolute_url}}">Zobacz profil użytkownika</a>
+            </div>
+            {{ form.font_family }}
+            {{ form.font_size }}
+            {{ form.picture }}
 
-            <p>Nie wiesz jak zacząć?<br>Sprawdź nasz poradnik pisania listów!</p>
-            <a href="inbox.html">Zobacz</a>
 
-            <p>Sprawdź całą konwersację z użytkownikiem</p>
-            <a href="inbox.html">Zobacz</a>
+            <div class="message-style">
+                <img id="selected-picture" src="" alt="Selected Picture" style="max-width: 300px; height: auto; display: none">
+            </div>
 
-            <input type="submit" style="padding:0" class="button" value="Wyślij list">
+            <div>
+                <p style="display: inline">Nie wiesz jak zacząć?<br>Sprawdź nasz <a style="display: inline" href="inbox.html">poradnik pisania listów</a>!</p>
+                <p style="display: inline">Sprawdź <a style="display: inline" href="inbox.html">całą konwersację</a> z użytkownikiem</p><br>
+                <input type="submit" style="padding:0" class="button" value="Wyślij list">
+            </div>
         </div>
     </form>
 {% endblock %}

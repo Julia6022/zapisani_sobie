@@ -1,49 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <div style="width: 25%">
-        <form method="GET">
+    <div style="width: 20%">
+        <form method="GET" action="{% url 'app:inbox' %}">
             <label style="font-size: 20px; margin-bottom: 20px">Filtruj skrzynkę pocztową:</label>
             <div style="margin-bottom: 5px">
-                <label for="q"><span class="material-icons">search</span>Wyszukaj:</label>
+                <label for="q"><span class="material-icons" style="font-size: 20px;">search</span>Wyszukaj:</label>
                 <input type="text" name="q" value="{{ request.GET.q }}">
             </div>
 
             <div style="margin-bottom: 20px">
-                <label for="type"><span class="material-icons">mail</span>Typ:</label>
-                <select name="status">
-                    <option value="">Wszystkie</option>
-                    <option value="sent" {% if request.GET.type == 'sent' %}selected{% endif %}>Wysłane</option>
-                    <option value="received" {% if request.GET.type == 'received' %}selected{% endif %}>Odebrane</option>
+                <label for="sorting"><span class="material-icons" style="font-size: 20px;">mail</span>Sortuj:</label>
+                <select id="sorting" name="sorting">
+                    <optgroup>
+                        <option value="all" {% if sorting_option == 'all' %}selected{% endif %}>Wszystkie</option>
+                    </optgroup>
+                    <optgroup label="Typ">
+                        <option value="received" {% if sorting_option == 'received' %}selected{% endif %}>Odebrane</option>
+                        <option value="sent" {% if sorting_option == 'sent' %}selected{% endif %}>Wysłane</option>
+                    </optgroup>
+                    <optgroup label="Status">
+                        <option value="read" {% if sorting_option == 'read' %}selected{% endif %}>Przeczytane</option>
+                        <option value="unread" {% if sorting_option == 'unread' %}selected{% endif %}>Nieprzeczytane</option>
+                    </optgroup>
                 </select>
             </div>
-
-            <div style="margin-bottom: 20px">
-                <label for="status"><span class="material-icons">autorenew</span>Status:</label>
-                <select name="status">
-                    <option value="">Wszystkie</option>
-                    <option value="unread" {% if request.GET.status == 'unread' %}selected{% endif %}>Nieprzeczytane</option>
-                    <option value="read" {% if request.GET.status == 'read' %}selected{% endif %}>Przeczytane</option>
-                </select>
-            </div>
-
             <button class="button" type="submit">Szukaj</button>
         </form>
     </div>
 
-    <ul style="width: 65%">
+    <ul style="width: 60%">
         {% for message in messages %}
             <li id="inboxmessage" class="{% if message.is_read %} read {% else %} unread {% endif %}">
                 <a class="message-title" style="align-items: center;" href="{% url 'app:view_message' message.id %}">
                     <img class="closedenvelope" src="{% static 'images/closed_envelope.png' %}" alt="Zdjęcie koperty"/>
                     <img class="openenvelope" src="{% static 'images/open_envelope.png' %}" alt="Zdjęcie koperty"/>
-                    <p>Od: {{ message.sender.username }}</p>
+                    <p>Od {{ message.sender.username }}</p>
+                    <p>Do {{ message.receiver.username }}</p>
                     <p>{{ message.subject }}</p><br>
                     <p>{{ message.sent_date }}</p>
                 </a>
             </li><br>
         {% empty %}
-            <li>Brak listów do wyśweitlenia.</li>
+            <li>Brak listów do wyświetlenia.</li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -15,53 +15,91 @@ img {
     object-position: center;
 }
 
-nav {
+
+.main {
     align-items: center;
 }
 
-nav ul {
+.main ul {
     list-style-type: none;
     padding: 0;
-    margin: 2% 0;
+    margin-bottom: 2%;
     overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-a {
-    color: rgb(128, 128, 128);
-}
-
-h1 {
-    text-decoration: underline;
-    font-size: 22px;
-    margin: 20px 0;
-}
-
-h2 {
-    text-decoration: underline;
-    font-size: 18px;
-    margin: 20px 0;
-}
-
-nav li a {
+.main li a {
     display: block;
     color: black;
-    font-size: 55px;
+    font-size: 50px;
     text-align: center;
     padding: 14px 19px;
     text-decoration: none;
     font-family: 'MonteCarlo', cursive;
 }
 
-a:hover {
-    color: #A0A0A0;
+.main a:hover {
+    color: rgb(175, 172, 167);
+}
+
+nav a:active {
+    color: rgb(175, 172, 167);
 }
 
 .navimage {
     height: 10px;
     width: fit-content;
+}
+
+.second-nav {
+    background-color: rgb(198, 194, 184, 56%);
+    padding: 5px 20px;
+    color: black;
+    align-items: flex-end;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    left: -110px;
+}
+
+.dropdown-content li {
+    flex-direction: row;
+    align-items: center;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 5px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown-content span {
+    font-size: 20px;
+    width: 20px;
+    padding-left: 15px;
+}
+
+.dropdown-icon:hover {color: rgb(230, 230, 230)}
+.dropdown-content a:hover {color: rgb(175, 172, 167)}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 body {
@@ -76,7 +114,7 @@ section {
     margin: 5% 8%;
     flex-direction: row;
     justify-content: space-evenly;
-    padding-bottom: 6rem;
+    min-height: 54vh;
 }
 
 footer {
@@ -86,35 +124,30 @@ footer {
     padding: 20px 30px;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100%;
-    position: absolute;
+    position: relative;
     bottom: 0;
-    height: 4rem;;
+    height: 4rem;
 }
 
-.alert {
-    background-color: rgb(179, 0, 0, 0.5);
-    border: 1px solid rgb(179, 0, 0);
-    border-radius: 15px;
-    width: 50%;
-    align-items: center;
-    padding: 10px;
+
+a {
+    color: rgb(128, 128, 128);
 }
 
-.container-info {
-    align-items: center;
-    margin-top: 15px;
-    opacity: 0;
-    animation: fade-in-out 2.5s forwards;
-    transition: opacity 0.5s;
+a:hover {
+    color: rgb(175, 172, 167);
 }
 
-@keyframes fade-in-out {
-    0% { opacity: 0 }
-    20% { opacity: 1; }
-    70% { opacity: 1; }
-    100% { opacity: 0;
+h1 {
+    text-decoration: underline;
+    font-size: 22px;
+    margin: 20px 0;
 }
+
+h2 {
+    text-decoration: underline;
+    font-size: 18px;
+    margin: 20px 0;
 }
 
 /**************************** MAIN PAGE *****************************************************************/
@@ -277,9 +310,14 @@ input[type="file"]::file-selector-button:hover {
     align-items: center;
 }
 
+
 span {
-    margin-right: 8px;
-    padding-bottom: 2px;
+    margin-right: 7px;
+}
+
+.material-icons {
+    font-size: 20px;
+
 }
 
 table {
@@ -309,8 +347,10 @@ form {
     width: 100%;
 }
 
-input[id="id_bio"] {
-    height: 300px;
+#bio {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
 }
 
 div[id="id_interests"] {
@@ -328,42 +368,11 @@ input[type="checkbox"] {
 /***************************** MESSAGES ***************************************************************************/
 
 
-.sending-message {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
 .message {
     background-image: url(images/message_background.png);
     background-size: cover;
     width: 800px;
     height: 521px;
-    font-family: 'MonteCarlo', cursive;
-    font-size: 30px;
-    margin: 0 20px 20px;
-}
-
-.next-to-message {
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 15px;
-}
-
-.view-message-title {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    font-family: 'MonteCarlo', cursive;
-    font-size: 30px;
-}
-
-.message-content {
-    background-image: url(images/message_background.png);
-    background-size: cover;
-    width: 800px;
-    height: 521px;
-    padding: 20px;
     font-family: 'MonteCarlo', cursive;
     font-size: 30px;
     margin: 0 20px 20px;
@@ -383,19 +392,55 @@ input[type="checkbox"] {
     outline: none;
 }
 
-.message input {
-    margin: 20px;
-    border-bottom: 1px solid black;
-    background: transparent;
-    width: 80%;
-    font-family: 'MonteCarlo', cursive;
-    font-size: 30px;
+.message textarea:first-of-type {
+    margin: 20px 20px 0 60px;
+    padding: 0;
+    width: auto;
+    height: 60px;
 }
 
-.message input:focus {
-    outline: none;
+.sending-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
+.next-to-message {
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 20px 20px;
+}
+
+
+.message-style {
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.message-style2 {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message-style2 select {
+    width: auto;
+    margin-left: 10px;
+}
+
+
+.view-message-title {
+    align-items: center;
+    margin: 20px 20px 0 60px;
+    padding: 0;
+    width: auto;
+    height: 60px;
+}
+
+.view-message-content{
+    padding: 0 20px 20px;
+    height: 98%;
+}
 
 /****************************** INBOX ***************************************************************************/
 

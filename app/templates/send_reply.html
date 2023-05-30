@@ -1,13 +1,92 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
+    <script style="display: none">
+        $(document).ready(function() {
+            $('#font-family-selector').on('change', function() {
+                var fontFamily = $(this).val();
+                $('#message-content, #message-title').css('font-family', fontFamily);
+            });
+
+            $('#font-size-selector').on('change', function() {
+                var fontSize = $(this).val();
+                $('#message-content, #message-title').css('font-size', fontSize + 'px');
+            });
+
+            $('#picture-selector').on('change', function() {
+                var picturePath = $(this).val();
+                if (picturePath) {
+                    $('#selected-picture').attr('src', picturePath);
+                    $('#selected-picture').show();
+                } else {
+                    $('#selected-picture').hide();
+                }
+            });
+        });
+    </script>
+
     <form class="sending-message" method="post">
         {% csrf_token %}
-<form method="post" action="">
-  {% csrf_token %}
-  <input type="text" name="subject" placeholder="Subject" value="Re: {{ original_message.subject }}"><br>
-  <textarea name="body" placeholder="Message"></textarea><br>
-  <input type="submit" value="Send">
-</form>
+        <div>
+            <div class="message">
+                <textarea name="subject" placeholder="Tytuł listu w odpowiedzi do: {{ original_message.subject }}"></textarea>
+                <textarea name="body" placeholder="Message"></textarea><br>
+            </div>
+        </div>
+
+        <div class="next-to-message">
+            <div style="margin-bottom: 30px">
+                <h1 style="text-decoration: none; margin: 0">Odpowiedź do: {{ user.first_name }}</h1>
+                <a href="{{ user.first_name }}">Zobacz profil użytkownika</a>
+            </div>
+
+            <div class="message-style">
+                <div class="message-style2">
+                    <label for="font-family-selector">Styl czcionki:</label>
+                    <select id="font-family-selector" style="width: 60%" name="font_family">
+                        <option value="Alex Brush">Alex Brush</option>
+                        <option value="Dancing Script">Dancing Script</option>
+                        <option value="Ephesis">Ephesis</option>
+                        <option value="Great Vibes">Great Vibes</option>
+                        <option value="Monte Carlo" selected>Monte Carlo</option>
+                        <option value="Parisienne">Parisienne</option>
+                        <option value="Petit Formal Script">Petit Formal Script</option>
+                    </select>
+                </div>
+
+                <div class="message-style2">
+                    <label for="font-size-selector">Rozmiar czionki:</label>
+                    <select id="font-size-selector" style="width: 50%" name="font_size">
+                        <option value="20">20px</option>
+                        <option value="30" selected>30px</option>
+                        <option value="35">35px</option>
+                        <option value="40">40px</option>
+                    </select>
+                </div>
+
+                <div class="message-style2">
+                    <label for="picture-selector">Dodatek:</label>
+                    <select id="picture-selector" style="width: 80%" name="picture">
+                        <option value="" selected>- - -</option>
+                        <option value="{% static 'images/flower1.png' %}">Kwiatek 1</option>
+                        <option value="{% static 'images/flower2.png' %}">Kwiatek 2</option>
+                        <option value="{% static 'images/teardrop.png' %}">Łza</option>
+                        <option value="{% static 'images/kiss.png' %}">Buziak</option>
+                        <option value="{% static 'images/hair.png' %}">Kosmyk włosów</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="message-style">
+                <img id="selected-picture" src="" alt="Selected Picture" style="max-width: 300px; height: auto; display: none">
+            </div>
+
+            <div>
+                <p style="display: inline">Nie wiesz jak zacząć?<br>Sprawdź nasz <a style="display: inline" href="inbox.html">poradnik pisania listów</a>!</p>
+                <p style="display: inline">Sprawdź <a style="display: inline" href="inbox.html">całą konwersację</a> z użytkownikiem</p><br>
+                <input type="submit" style="padding:0" class="button" value="Wyślij list">
+            </div>
+        </div>
     </form>
 {% endblock %}
 

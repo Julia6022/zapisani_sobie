@@ -1,5 +1,5 @@
 """
-ASGI config for licencjat project.
+ASGI config for zapisani_sobie project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'licencjat.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zapisani_sobie.settings')
 
 application = get_asgi_application()

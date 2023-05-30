@@ -1,29 +1,38 @@
 <html lang="pl">
 <head>
     {% load static %}
+    {% block title %} {% endblock %}
     <title style="display: none">Zapisani sobie</title>
 
     <link rel='stylesheet' href='{% static 'style.css' %}' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Allison&family=Barlow+Condensed:wght@200&family=Ephesis&family=Gwendolyn&family=Lato:wght@100;400&family=Lovers+Quarrel&family=Mea+Culpa&family=MonteCarlo&family=Open+Sans:wght@300;400&family=Pinyon+Script&family=Qwigley&family=Roboto+Condensed:wght@300&family=Roboto:wght@300&family=Source+Sans+Pro:wght@300&family=Whisper&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Dancing+Script&family=Ephesis&family=Great+Vibes&family=Lato:wght@400;700&family=MonteCarlo&family=Parisienne&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portal randkowy do wysyłania listów miłosnych.">
-
 </head>
 <body>
     {% load static %}
-    <nav>
+    <nav class="second-nav">
+        <ul style="flex-direction: row; align-items: center">
+            <li style="margin-right: 5px" class="dropdown-icon"><span class="material-icons" style="font-size: 20px;">translate</span></li>
+            <ul style="align-items: flex-end" class="dropdown">
+                <li class="dropdown-icon"><span class="material-icons" style="font-size: 23px;">menu</span></li>
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'app:profile' %}"><span class="material-icons" style="font-size: 20px;">person</span>Konto</a></li>
+                    <li><a href="{% url 'app:logout' %}"><span class="material-icons" style="font-size: 20px;">logout</span>Wyloguj się</a></li>
+                </ul>
+            </ul>
+        </ul>
+    </nav>
+    <nav class="main">
         {% if user.is_authenticated %}
             <ul>
                 <li><a href="{% url 'app:index' %}">Strona główna</a></li>
                 <li><a href="{% url 'app:profile_list' %}">Profile</a></li>
                 <li><a href="{% url 'app:inbox' %}">Listy</a></li>
-                <li><a href="{% url 'app:profile' %}">Konto</a></li>
-                <li><a href="{% url 'app:logout' %}">Wyloguj się</a></li>
             </ul>
         {% else %}
             <ul>
@@ -34,9 +43,6 @@
         {% endif %}
         <img style="margin-top: -30px;" class="navimage" src="{% static 'images/border_nav.png' %}" alt="Zdjęcie ramki"/>
     </nav>
-
-
-
     <section>
         {% load static %}
         {% block body %}

@@ -4,17 +4,17 @@
     <form method="GET">
         <label style="font-size: 20px; margin-bottom: 20px">Filtruj listę użytkowników:</label>
         <div style="margin-bottom: 5px">
-            <label for="name"><span class="material-icons">person</span>Imię:</label>
+            <label for="name"><span class="material-icons" style="font-size: 20px;">person</span>Imię:</label>
             <input type="text" name="name" value="{{ request.GET.name }}">
         </div>
 
         <div style="margin-bottom: 5px">
-            <label for="subject"><span class="material-icons">edit</span>Login:</label>
+            <label for="subject"><span class="material-icons" style="font-size: 20px;">edit</span>Login:</label>
             <input type="text" name="username" value="{{ request.GET.username }}">
         </div>
 
         <div style="margin-bottom: 20px">
-            <label for="sex"><span class="material-icons">transgender</span>Płeć:</label>
+            <label for="sex"><span class="material-icons" style="font-size: 20px;">transgender</span>Płeć:</label>
             <select name="sex">
                 <option value="">Wszyscy</option>
                 <option value="men" {% if request.GET.status == 'men' %}selected{% endif %}>Mężczyźni</option>
@@ -32,7 +32,7 @@
                     <img src="{{ profile.profile_pic.url }}" alt="Zdjęcie użytkownika {{ profile.user.username }}">
 
                     <div style="width: 100%; flex-direction: row; justify-content: space-around; align-items: center; margin-top: 5px">
-                        <p>{{ profile.user.first_name }}</p>
+                        <strong>{{ profile.user.first_name }}</strong>
                         <p>{{ profile.age }} lat</p>
                         <span class="material-icons">favorite</span>
                     </div>

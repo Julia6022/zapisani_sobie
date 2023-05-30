@@ -3,7 +3,6 @@ from .models import UserProfile, Message, User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django_countries.fields import CountryField
 
-
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label='Login',
                                max_length=150,
@@ -78,8 +77,8 @@ class RegisterForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     bio = forms.CharField(max_length=500,
                           required=False,
-                          widget=forms.TextInput,
-                          label='Opis')
+                          label='Opis',
+                          widget = forms.Textarea(attrs={'id': 'bio'}))
 
     country = CountryField(blank_label='Kraj zamieszkania')
 
@@ -148,6 +147,41 @@ class UserProfileForm(forms.ModelForm):
 
 
 class MessageForm(forms.ModelForm):
+    subject = forms.CharField(widget=forms.Textarea(attrs={'id': 'message-title',
+                                                        'placeholder': 'Tytuł listu ...'}))
+
+    body = forms.CharField(widget=forms.Textarea(attrs={'id': 'message-content',
+                                                        'placeholder': 'Treść listu ...'}))
+
+    font_family = forms.ChoiceField(
+        required=False,
+        widget=forms.Select(attrs={'id': 'font_family'}),
+        choices=[("Alex Brush", "Alex Brush"),
+                 ("Dancing Script", "Dancing Script"),
+                 ("Ephesis", "Ephesis"),
+                 ("Great Vibes", "Great Vibes"),
+                 ("Monte Carlo", "Monte Carlo"),
+                 ("Parisienne", "Parisienne"),
+                 ("Petit Formal Script", "Petit Formal Script")])
+
+    font_size = forms.ChoiceField(
+        required=False,
+        widget=forms.Select(attrs={'id': 'font_size'}),
+        choices=[("20", "20px"),
+                 ("30", "30px"),
+                 ("35", "35px"),
+                 ("40", "40px")])
+
+    picture = forms.ChoiceField(
+        required=False,
+        widget=forms.Select(attrs={'id': 'picture'}),
+        choices=[("", "- - -"),
+                 ("images/flower1.png", "Kwiatek 1"),
+                 ("images/flower2.png", "Kwiatek 2"),
+                 ("images/teardrop.png", "Łza"),
+                 ("images/kiss.png", "Buziak"),
+                 ("images/hair.png", "Kosmyk włosów")])
+
     class Meta:
         model = Message
-        fields = ['subject', 'body']
+        fields = ['picture', 'font_family', 'font_size', 'subject', 'body']

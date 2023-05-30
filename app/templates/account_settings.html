@@ -3,41 +3,48 @@
 {% block body %}
     <div class="profileinfo">
         <img class="profile_pic" src="{% static 'images/border_img.png' %}" alt='Ramka zdjęcia'>
-        <img src="{{ request.user.userprofile.profile_pic.url }}" alt="Zdjęcie użytkownika {{ request.user.first_name }}">
-        <div style="flex-direction: row; justify-content: space-between">
-            <h2>{{ user.first_name  }}</h2>
-            <h2>{{ user.userprofile.age }}</h2>
-            <h2>{{ number_of_followers }}</h2>
-            <form class="profileinfo" style="width: 60%; flex-direction: column" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ profile_form.image }}
-            </form>
+        <img src="{{ user.userprofile.profile_pic.url }}" alt="Zdjęcie użytkownika {{ user.first_name }}">
+            <div style="width: 100%; flex-direction: row; justify-content: space-evenly">
+                <h2 style="text-decoration: none">{{ user.username  }}</h2>
+                <h2 style="text-decoration: none">{{ user.userprofile.age }} lat</h2>
+            </div>
         </div>
     </div>
+
     <form class="profileinfo" style="width: 50%" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             <tr>
-                <td class="label"><span class="material-icons">person</span>Imię:</td>
+                <td class="label"><span class="material-icons" style="font-size: 20px;">person</span>Imię:</td>
                 <td>{{ user_form.first_name }}</td>
             </tr>
             <tr>
-                <td class="label"><span class="material-icons">person</span>Nazwisko:</td>
+                <td class="label"><span class="material-icons" style="font-size: 20px;">person</span>Nazwisko:</td>
                 <td>{{ user_form.last_name }}</td>
             </tr>
             <tr>
-                <td class="label"><span class="material-icons">transgender</span>Płeć:</td>
+                <td class="label"><span class="material-icons" style="font-size: 20px;">transgender</span>Płeć:</td>
                 <td>{{ user_form.sex }}</td>
             </tr>
             <tr>
                 <td class="label"><span class="material-icons">cake</span>Data urodzenia:</td>
                 <td>{{ user_form.date_of_birth }}</td>
             </tr>
-        </table><br>
-        <button type="submit" class="button" style="width: 50%">
-            <span style="margin-right: 10px" class="material-icons">edit</span>
-            Zapisz zmiany na profilu
-        </button>
+            <tr>
+                <td>
+                    <button type="submit" class="button" style="width: 80%; background-color: rgb(179 0 0 / 41%);">
+                        <span style="margin-right: 10px; font-size: 20px" class="material-icons">delete</span>
+                        Usuń konto
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="button" style="width: 80%; background-color: rgb(125 170 124 / 79%);">
+                        <span style="margin-right: 10px; font-size: 20px" class="material-icons">edit</span>
+                        Zapisz zmiany
+                    </button>
+                </td>
+            </tr>
+        </table>
     </form>
 {% endblock %}
 

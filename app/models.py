@@ -129,8 +129,8 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-
 ################## WIADOMOŚCI #####################################################
+
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
@@ -140,6 +140,12 @@ class Message(models.Model):
     is_read = models.BooleanField(default=False)
     body = models.TextField()
 
+    font_family = models.CharField(max_length=50, blank=True)
+    font_size = models.CharField(max_length=5, blank=True)
+    picture = models.CharField(max_length=50, blank=True)
+
+
     def __str__(self):
         return self.subject
+
 

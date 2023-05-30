@@ -79,7 +79,6 @@ def profile_settings(request):
 
         if profile_form.is_valid():
             profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
             return redirect('app:profile')
     else:
         profile_form = UserProfileForm(instance=user.userprofile)
@@ -95,7 +94,6 @@ def account_settings(request):
 
         if user_form.is_valid():
             user_form.save()
-            messages.success(request, 'Your profile is updated successfully')
             return redirect('app:profile')
     else:
         user_form = RegisterForm(instance=user)
@@ -179,31 +177,38 @@ def user_profile(request, user_id):
 
 @login_required
 def inbox(request):
-    messages = Message.objects.all()
-    query = request.GET.get('q')
+    user = request.user
+    sorting_options = request.GET.get('sorting', 'received')
+    search_query = request.GET.get('q')
 
-    if request.GET.get('type') == 'received':
-        messages = messages.filter(receiver=request.user)
-    elif request.GET.get('type') == 'sent':
-        messages = messages.filter(sender=request.user)
+    messages = Message.objects.none()
 
-    if request.GET.get('status') == 'read':
-        messages = messages.filter(is_read=True)
-    elif request.GET.get('status') == 'unread':
-        messages = messages.filter(is_read=False)
+    if 'received' in sorting_options:
+        messages |= Message.objects.filter(receiver=user).order_by('-sent_date')
+    if 'sent' in sorting_options:
+        messages |= Message.objects.filter(sender=user).order_by('-sent_date')
+    if 'read' in sorting_options:
+        messages |= Message.objects.filter(receiver=user, is_read=True).order_by('-sent_date')
+    if 'unread' in sorting_options:
+        messages |= Message.objects.filter(receiver=user, is_read=False).order_by('-sent_date')
+    if 'all' in sorting_options:
+        messages = Message.objects.filter(sender=user) | Message.objects.filter(receiver=user).order_by('-sent_date')
 
-    if query:
+    if search_query:
         messages = messages.filter(
-            Q(sender__first_name__icontains=query) |
-            Q(sender__username__icontains=query) |
-            Q(subject__icontains=query) |
-            Q(body__icontains=query)
+            Q(subject__icontains=search_query) |
+            Q(body__icontains=search_query) |
+            Q(receiver__first_name__icontains=search_query) |
+            Q(receiver__username__icontains=search_query)
         )
 
-    messages = messages.order_by('-sent_date')
+    context = {
+        'messages': messages,
+        'sorting_option': sorting_options,
+        'search_query': search_query,
+    }
 
-    return render(request, 'inbox.html', {'messages': messages})
-
+    return render(request, 'inbox.html', context)
 
 @login_required
 def view_message(request, message_id):
@@ -212,7 +217,6 @@ def view_message(request, message_id):
         message.is_read = True
         message.save()
     return render(request, 'view_message.html', {'message': message})
-
 
 
 @login_required
@@ -239,8 +243,11 @@ def send_reply(request, message_id):
     if request.method == 'POST':
         subject = request.POST['subject']
         body = request.POST['body']
+        font_size = request.POST['font_size']
+        font_family = request.POST['font_family']
+        picture = request.POST['picture']
         message = Message.objects.create(sender=request.user, receiver=original_message.sender,
-                                         subject=subject, body=body)
+                                         subject=subject, body=body, font_size=font_size, font_family=font_family, picture=picture)
         return redirect('app:inbox')
 
     return render(request, 'send_reply.html', {'original_message': original_message})
